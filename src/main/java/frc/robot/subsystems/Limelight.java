@@ -6,19 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;;
 
-
-/**
- * Add your docs here.
- */
 public class Limelight extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  //Instance NetworkTable to obtain realtime data from the Limelight
   public NetworkTable ll = NetworkTableInstance.getDefault().getTable("limelight");
 
   public NetworkTableEntry horizontalOffset = ll.getEntry("tx");
@@ -29,57 +24,51 @@ public class Limelight extends Subsystem {
   public NetworkTableEntry cameraMode = ll.getEntry("camMode");
 
   public double getHorizontalOffset(){
+    //Returns x offset angle of the robot from the target
     return horizontalOffset.getDouble(0.0);
   }
 
   public double getVerticalOffset(){
+    //Returns y offset angle of the robot from the target
     return verticalOffset.getDouble(0.0);
-  }
-
-  public double getTargetArea(){
-    return targetArea.getDouble(0.0);
   }
   
   public double getSkew(){
     return skew.getDouble(0.0);
   }
+
   public void switchLED(int mode){
+    //Sets LED mode (1: Off, 2: Blink, 3: On)
     switch (mode){
       case 1:
-      led.setDouble(1);
-      break;
-    case 2:
-      led.setDouble(2);
-      break;
-    case 3:
-      led.setDouble(3);
-      break;
-    default:
-      led.setDouble(0);
-      break;
+        led.setDouble(1);
+        break;
+      case 2:
+        led.setDouble(2);
+        break;
+      case 3:
+        led.setDouble(3);
+        break;
+      default:
+        led.setDouble(0);
+        break;
     }
     return;
   }
-  public void camMode(int mode)
-  {
-    if(mode ==1){
-      cameraMode.setDouble(1);
-    } else {
-      cameraMode.setDouble(0);
-    }
+  public void camMode(int mode){
+    //Toggles vision processing on the Limelight (0: On, 1: Off with Driver Mode for increased exposure)
+    if (mode == 1) cameraMode.setDouble(1);
+    else cameraMode.setDouble(0);
     return;
   }
 
-  public double rotatetoTarget(double PID)
-  {
-    double power;
-    power = horizontalOffset.getDouble(0)*PID;
+  public double rotatetoTarget(double PID){
+    //Calculates power necessary to shift drivetrain and align with the target
+    double power = horizontalOffset.getDouble(0)*PID;
     return power;
   }
 
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  public void initDefaultCommand(){
   }
 }

@@ -6,46 +6,37 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 import frc.robot.OI;
 
-/**
- * An example command.  You can replace me with your own command.
- */
+import edu.wpi.first.wpilibj.command.Command;
+
 public class Drive extends Command {
-  public Drive() {
-    // Use requires() here to declare subsystem dependencies
+  public Drive(){
     requires(Robot.dt);
   }
-
-  // Called just before this Command runs the first time
+  
   @Override
-  protected void initialize() {
+  protected void initialize(){
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  //Instances ArcadeDrive with controller input
   @Override
-  protected void execute() {
+  protected void execute(){
     Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY), OI.driver.getRawAxis(OI.rightX));
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  //Command runs indefinitely since there is usu no need to disable driving capability
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished(){
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end(){
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted(){
   }
 }

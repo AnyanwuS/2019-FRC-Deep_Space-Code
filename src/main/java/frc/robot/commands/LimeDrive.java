@@ -6,66 +6,60 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
+import frc.robot.Robot;
+import frc.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-//import frc.robot.OI;
-//import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj.Timer;
-/**
- * An example command.  You can replace me with your own command.
- */
-public class LimeDrive extends Command {
-  public LimeDrive() {
-    // Use requires() here to declare subsystem dependencies
+
+public class LimeDrive extends Command{
+  /*
+  Uses data from the Limelight subsystem to correct
+  the robot's horizontal offset from the target
+  */
+  public LimeDrive(){
     requires(Robot.dt);
     requires(Robot.lm);
   }
 
-  // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize(){
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute(){
+    /*
+      Calculates level of adjustment required to shift the robot to the target on-screen
+      Remember to reconfigure Kp and minPower depending on the driving surface,
+      esp. before competition
+    */
     double headingError = Robot.lm.getHorizontalOffset();
     double steeringAdjust = 0.0f;
+    //TODO: Put Kp and minPower in a config file
     double Kp = 0.07;
     double minPower = 0.0;
 
-
-    //System.out.println("LED should be force blinking");
     if(Robot.lm.getHorizontalOffset() > 1){
       steeringAdjust = Kp * headingError - minPower;
-      //System.out.println(steeringAdjust + "\n" +  headingError + "right");
-    }
-    else if(headingError < 1){
+    }else if(headingError < 1){
       steeringAdjust = Kp * headingError + minPower;
-      //System.out.println(steeringAdjust + "\n" + headingError + "left" );
-      
     }
 
-    Robot.dt.ArcadeDrive(Robot.oi.driver.getRawAxis(1), steeringAdjust);
+    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(1), steeringAdjust);
     Timer.delay(.005);
-
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return false;//was false 
+  protected boolean isFinished(){
+    //Originally returned false; Make sure this does not mess limedrive execution up
+    return true;
   }
 
-  // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end(){
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted(){
   }
 }

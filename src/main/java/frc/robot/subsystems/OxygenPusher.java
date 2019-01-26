@@ -7,43 +7,30 @@
 
 package frc.robot.subsystems;
 
+//import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- This is the pneumatics class. if you do not change the PCM CAN ID,
- then you do not need to configure it at all.
- */
+//Pneumatics subsystem
 public class OxygenPusher extends Subsystem {
-  //Create the solenoids for the shifter
+  public boolean pushState = false;
+  //Solenoids for the shifter; Only reconfigure if PCM CAN ID changes are necessary
   public DoubleSolenoid leftShifter = new DoubleSolenoid(0,1);
   public DoubleSolenoid rightShifter = new DoubleSolenoid(3,4);
 
-
-  public void shiftDriveTrain(Boolean shift){
-
+  public void shiftPiston(Boolean shift){
     if(shift){
+      //Activates piston
       leftShifter.set(DoubleSolenoid.Value.kForward);
       rightShifter.set(DoubleSolenoid.Value.kForward);
-      //shift = false;
-    }
-    else{
+    }else{
+      //Deactivates piston
       leftShifter.set(DoubleSolenoid.Value.kReverse);
       rightShifter.set(DoubleSolenoid.Value.kReverse);
-      //shift = true;
-      System.out.println("debug2");
     }
-
   }
 
-
-
-
-
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  public void initDefaultCommand(){
   }
 }

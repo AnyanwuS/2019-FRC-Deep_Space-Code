@@ -8,55 +8,61 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.OxygenPusher;
 import frc.robot.Robot;
 
 public class ArgonPusher extends Command {
-  /**
-   * Add your docs here.
-   */
-  public ArgonPusher() {
-    requires(Robot.op);
-    // Add Commands here:
-    // e.g. addSequential(new Command1());
-    // addSequential(new Command2());
-    // these will run in order.
+  //Checks to see if the piston is active
+  public static boolean ps = Robot.op.pushState;
+  //TODO: Double-check combined piston command
+  public ArgonPusher(){
+    /*
+      requires(Robot.op);
+      Add Commands here:
+      e.g. addSequential(new Command1());
+      addSequential(new Command2());
+      these will run in order.
 
-    // To run multiple commands at the same time,
-    // use addParallel()
-    // e.g. addParallel(new Command1());
-    // addSequential(new Command2());
-    // Command1 and Command2 will run in parallel.
+      To run multiple commands at the same time,
+      use addParallel()
+      e.g. addParallel(new Command1());
+      addSequential(new Command2());
+      Command1 and Command2 will run in parallel.
 
-    // A command group will require all of the subsystems that each member
-    // would require.
-    // e.g. if Command1 requires chassis, and Command2 requires arm,
-    // a CommandGroup containing them would require both the chassis and the
-    // arm.
+      A command group will require all of the subsystems that each member
+      would require.
+      e.g. if Command1 requires chassis, and Command2 requires arm,
+      a CommandGroup containing them would require both the chassis and the
+      arm.
+    */
   }
+
   @Override
-  protected void initialize() {
+  protected void initialize(){
   }
+
   @Override 
-  public void execute() {
-  //addSequential(new shiftDriveTrain(true));
-   Robot.op.shiftDriveTrain(false);
-   System.out.println("debug2");
+  public void execute(){
+    //addSequential(new shiftPiston(true));
+    if (!ps){
+      Robot.op.shiftPiston(true);
+      ps = true;
+    }else{
+      Robot.op.shiftPiston(false);
+      ps = false;
+    }
   }
 
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished(){
     return true;
   }
 
   @Override 
-  public void end() {
-   
+  public void end(){
   }
 
   @Override 
   protected void interrupted(){
-
   }
 }
 

@@ -6,44 +6,38 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import frc.robot.Robot;
-import frc.robot.commands.Drive;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-//import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import frc.robot.RobotMap;
 
-/**
- * An example subsystem.  You can replace me with your own Subsystem.
- */
+import frc.robot.commands.Drive;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 public class DriveTrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  public WPI_TalonSRX frontLeft = new WPI_TalonSRX(Robot.rm.leftMaster);
-  public WPI_TalonSRX frontRight = new WPI_TalonSRX(Robot.rm.rightMaster);
-  public WPI_TalonSRX rearLeft = new WPI_TalonSRX(Robot.rm.leftSlave);
-  public WPI_TalonSRX rearRight = new WPI_TalonSRX(Robot.rm.rightSlave);
+  //Declare TalonSRX motors
+  public WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.leftMaster);
+  public WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.rightMaster);
+  public WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.leftSlave);
+  public WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.rightSlave);
+  public WPI_TalonSRX midLeft = new WPI_TalonSRX(RobotMap.leftDonkey);
+  public WPI_TalonSRX midRight = new WPI_TalonSRX(RobotMap.rightDonkey);
 
   public DifferentialDrive dt = new DifferentialDrive(frontLeft, frontRight);
 
   public DriveTrain(){
+    //Sets rear motors to follow rotation of the primary motors
     dt.setSafetyEnabled(false);
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
   }
 
-
-  public void ArcadeDrive (double x, double rotation) {
-
+  public void ArcadeDrive (double x, double rotation){
     dt.arcadeDrive(-x, rotation);
   }
 
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  public void initDefaultCommand(){
     setDefaultCommand(new Drive());
   }
 }

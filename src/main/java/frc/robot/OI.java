@@ -6,23 +6,21 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import frc.robot.commands.NitrogenPusher;
+
 import frc.robot.commands.ArgonPusher;
 import frc.robot.commands.LimeDrive;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;;
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+/*
+	This class is the glue that binds the controls on the physical operator
+	interface (controller) to the commands and command groups that allow control of the robot.
+*/
 public class OI {
-  /**
-   * Thanks to Jack Derunz this template lists all the buttons avalible
-   * and it makes button integration very EZ
-   * Don't change this it is perfect 
-   */
-  public static Joystick driver = new Joystick(0);
+	//Attach raw button inputs to their corresponding names
+  	public static Joystick driver = new Joystick(0);
 	public static Joystick operator = new Joystick(1);
 	public static Joystick autonomousSelect = new Joystick(2);
 	
@@ -49,14 +47,11 @@ public class OI {
 	public static int leftY = 1;
 	public static int rightY = 5;
 	public static int leftTrigger = 2;
-  public static int rightTrigger = 3;
+  	public static int rightTrigger = 3;
   
-  /**
-   * add the new button imputs here under the second OI class
-   */
   public OI(){
-	  A.whenPressed(new NitrogenPusher());
-	  B.whenPressed(new ArgonPusher());
+	  //Bind commands to buttons here
+	  A.whenPressed(new ArgonPusher());
 	  RB.whileHeld(new LimeDrive());
 
   }
