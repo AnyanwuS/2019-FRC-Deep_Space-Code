@@ -18,8 +18,8 @@ public class RobotMap {
   public static int leftSlave = 12;
   public static int rightMaster = 13;
   public static int rightSlave = 14;
-  public static int leftDonkey = 15;
-  public static int rightDonkey = 16;
+  public static int leftDonkey = 16;
+  public static int rightDonkey = 15;
 
   /*
     If you are using multiple modules, make sure to define

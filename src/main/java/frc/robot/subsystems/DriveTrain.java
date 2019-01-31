@@ -23,17 +23,19 @@ public class DriveTrain extends Subsystem {
   public WPI_TalonSRX midLeft = new WPI_TalonSRX(RobotMap.leftDonkey);
   public WPI_TalonSRX midRight = new WPI_TalonSRX(RobotMap.rightDonkey);
 
-  public DifferentialDrive dt = new DifferentialDrive(frontLeft, frontRight);
+  public DifferentialDrive dd = new DifferentialDrive(frontLeft, frontRight);
 
   public DriveTrain(){
     //Sets rear motors to follow rotation of the primary motors
-    dt.setSafetyEnabled(false);
+    dd.setSafetyEnabled(false);
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
+    midLeft.follow(frontLeft);
+    midRight.follow(frontRight);
   }
 
   public void ArcadeDrive (double x, double rotation){
-    dt.arcadeDrive(-x, rotation);
+    dd.arcadeDrive(-x, rotation);
   }
 
   @Override
