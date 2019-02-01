@@ -16,6 +16,7 @@ public class Limelight extends Subsystem {
   //Instance NetworkTable to obtain realtime data from the Limelight
   public NetworkTable ll = NetworkTableInstance.getDefault().getTable("limelight");
 
+  public NetworkTableEntry target = ll.getEntry("tv");
   public NetworkTableEntry horizontalOffset = ll.getEntry("tx");
   public NetworkTableEntry verticalOffset = ll.getEntry("ty");
   public NetworkTableEntry targetArea = ll.getEntry("ta");
@@ -68,6 +69,11 @@ public class Limelight extends Subsystem {
     return power;
   }
 
+  //Returns true if target is in frame, false is no valid target
+  public Boolean validTarget(){
+    if (target.getDouble(0) == 1) return true;
+    else return false;
+  }
   @Override
   public void initDefaultCommand(){
   }

@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.Drive;
-import frc.robot.commands.LimeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.OxygenPusher;
 import frc.robot.subsystems.Limelight;
+import frc.robot.commands.AutoLimeDrive;
 
 /*
   The VM is configured to automatically run this class, and to call the
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     //TODO: Add drive modes (autonomous) to SmartDashboard here and in autonomousInit()
     m_chooser.setDefaultOption("Teleop Drive", new Drive());
-    m_chooser.addOption("Corrective Drive", new LimeDrive());
+    m_chooser.addOption("Auto Drive", new AutoLimeDrive());
     SmartDashboard.putData("Teleop", m_chooser);
   }
 

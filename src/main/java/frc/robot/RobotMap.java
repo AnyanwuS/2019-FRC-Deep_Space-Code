@@ -20,6 +20,7 @@ public class RobotMap {
   public static int rightSlave = 14;
   public static int leftDonkey = 16;
   public static int rightDonkey = 15;
+  public static int roadRoller = 17;
 
   /*
     If you are using multiple modules, make sure to define

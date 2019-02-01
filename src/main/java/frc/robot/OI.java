@@ -9,6 +9,8 @@ package frc.robot;
 
 //import frc.robot.commands.ArgonPusher;
 import frc.robot.commands.LimeDrive;
+import frc.robot.commands.AutoLimeDrive;
+import frc.robot.commands.TimedDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -60,5 +62,9 @@ public class OI {
 	  //Bind commands to buttons here
 	  //A.whenPressed(new ArgonPusher());
 	  RB.whileHeld(new LimeDrive());
+	  //TODO: Put on operator controller after autonomous is fully tested
+	  A.whenPressed(new AutoLimeDrive());
+	  B.whenPressed(new TimedDrive(3, -0.5));
+	  X.whenPressed(new TimedDrive(5, 1));
   }
 }
