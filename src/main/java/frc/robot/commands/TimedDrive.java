@@ -11,35 +11,35 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TimedDrive extends Command {
 
-    private long time = 0;
-    private double duration = 0, pwr = 0;
+    private double xPower = 0, yPower = 0;
+    private double time = 0;
 
-    public TimedDrive(double length, double power) {
+    public TimedDrive(double x, double y, double duration) {
         requires(Robot.dt);
-        this.setTimeout(3);
-        this.pwr = power;
-        this.duration = length * 1000;
+        this.xPower = x;
+        this.yPower = y;
+        this.setTimeout(duration*1000);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize(){
         time = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-        Robot.dt.ArcadeDrive(pwr, 0);
+    protected void execute(){
+        Robot.dt.ArcadeDrive(xPower, yPower);
         Timer.delay(0.005);
     }
 
 
-    protected boolean isFinished() {
+    protected boolean isFinished(){
         if (this.isTimedOut()) return true;
         return false;
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+    protected void end(){
         Robot.dt.ArcadeDrive(0, 0);
     }
 }

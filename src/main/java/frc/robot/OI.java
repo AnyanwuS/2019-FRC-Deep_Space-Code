@@ -64,7 +64,7 @@ public class OI {
 	  RB.whileHeld(new LimeDrive());
 	  //TODO: Put on operator controller after autonomous is fully tested
 	  A.whenPressed(new AutoLimeDrive());
-	  B.whenPressed(new TimedDrive(3, -0.5));
-	  X.whenPressed(new TimedDrive(5, 1));
+	  B.whenPressed(new TimedDrive(-0.5, 0, 3));
+	  X.whenPressed(new TimedDrive(1, 0, 5));
   }
 }

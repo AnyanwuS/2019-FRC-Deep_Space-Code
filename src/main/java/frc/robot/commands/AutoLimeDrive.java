@@ -16,6 +16,6 @@ public class AutoLimeDrive extends CommandGroup {
   */
   public AutoLimeDrive(){
     addSequential(new LimeDrive());
-    addSequential(new TimedDrive(3, 0.5));
+    addSequential(new TimedDrive(0.5, 0, 3));
   }
 }
