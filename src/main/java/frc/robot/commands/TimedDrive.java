@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import frc.robot.Robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,24 +11,22 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TimedDrive extends Command {
 
-    private double xPower = 0, yPower = 0;
-    private double time = 0;
+    private double x = 0, y = 0;
 
     public TimedDrive(double x, double y, double duration) {
         requires(Robot.dt);
-        this.xPower = x;
-        this.yPower = y;
-        this.setTimeout(duration*1000);
+        this.x = x;
+        this.y = y;
+        this.setTimeout(duration);
     }
 
     // Called just before this Command runs the first time
     protected void initialize(){
-        time = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute(){
-        Robot.dt.ArcadeDrive(xPower, yPower);
+        Robot.dt.ArcadeDrive(-x, y);
         Timer.delay(0.005);
     }
 

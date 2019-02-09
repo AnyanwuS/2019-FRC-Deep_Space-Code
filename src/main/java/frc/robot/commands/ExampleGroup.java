@@ -6,15 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class TestDrive extends CommandGroup {
+//Example CommandGroup
+public class ExampleGroup extends CommandGroup {
   /*
-  Additionally drives towards the target in addition to adjusting towards the target
+  CommandGroups are able to run multiple commands either sequentially on in parallel
+  addSequential(new Command()) statements will run the parametrized commands in the order they are called
+  addParallel(new Command()) statements will run commands at the same time as other commands called with addParallel()
   */
-  public TestDrive(){
-    addSequential(new TimedDrive(0.5, 0.0, 3.0));
+  public ExampleGroup(){
+    
   }
 }

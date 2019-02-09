@@ -5,16 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+public class Encoder extends Subsystem {
 
-public class AutoLimeDrive extends CommandGroup {
-  /*
-  Additionally drives towards the target in addition to adjusting towards the target
-  */
-  public AutoLimeDrive(){
-    addSequential(new LimeDrive());
-    addSequential(new TimedDrive(0.5, 0, 3));
+  @Override
+  public void initDefaultCommand(){
+    //Set the default command for a subsystem here.
+    //setDefaultCommand(new MySpecialCommand());
   }
 }

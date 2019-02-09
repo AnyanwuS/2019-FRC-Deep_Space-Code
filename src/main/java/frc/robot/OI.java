@@ -6,11 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
-//import frc.robot.commands.ArgonPusher;
-import frc.robot.commands.LimeDrive;
-import frc.robot.commands.AutoLimeDrive;
-import frc.robot.commands.TimedDrive;
+import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -63,8 +59,12 @@ public class OI {
 	  //A.whenPressed(new ArgonPusher());
 	  RB.whileHeld(new LimeDrive());
 	  //TODO: Put on operator controller after autonomous is fully tested
-	  A.whenPressed(new AutoLimeDrive());
-	  B.whenPressed(new TimedDrive(-0.5, 0, 3));
-	  X.whenPressed(new TimedDrive(1, 0, 5));
+	  /*TODO: Toggle command to switch direction of arcade drive for teleop
+	  Select.whenPressed(new switchMode());*/
+
+	  /* Switching from input to output requires the roller to pass through an off state
+	  EX: LB (intake) -> RB (off) -> RB (exhaust) */
+	  LB.whenPressed(new FeederIn(0.8));
+	  RB.whenPressed(new FeederOut(-0.6));
   }
 }

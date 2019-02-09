@@ -8,25 +8,19 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;;
+import com.ctre.phoenix.motorcontrol.can.*;
 
-/**
- * Add your docs here.
- */
 public class Roller extends Subsystem {
-  public PowerDistributionPanel pdp = new PowerDistributionPanel();
+  public WPI_VictorSPX RoadRoller = new WPI_VictorSPX(RobotMap.roadRoller);
+  public boolean enabled = false;
 
-  public WPI_TalonSRX RoadRoller = new WPI_TalonSRX(RobotMap.roadRoller);
-  
-  public void intake(){
-      RoadRoller.set(0.8);
+  public Roller(){
   }
-  public void exhaust(){
-  RoadRoller.set(-0.8);
+
+  public void setMotor(double power){
+    RoadRoller.set(power);
   }
 
   @Override

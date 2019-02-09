@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.Drive;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.OxygenPusher;
-import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.*;
+
 import frc.robot.commands.AutoLimeDrive;
 
 /*
@@ -31,10 +30,12 @@ public class Robot extends TimedRobot {
   public static Limelight lm = new Limelight();
   public static DriveTrain dt = new DriveTrain();
   public static OxygenPusher op = new OxygenPusher();
+  public static PDP pdp = new PDP();
+  public static Roller rl = new Roller();
 
   public static RobotMap rm = new RobotMap();
   public static OI oi = new OI();
-  
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 

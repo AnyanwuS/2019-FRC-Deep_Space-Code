@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
+import java.lang.Math;
 
 public class Limelight extends Subsystem {
   //Instance NetworkTable to obtain realtime data from the Limelight
@@ -23,6 +25,13 @@ public class Limelight extends Subsystem {
   public NetworkTableEntry skew = ll.getEntry("ts");
   public NetworkTableEntry led = ll.getEntry("ledMode");
   public NetworkTableEntry cameraMode = ll.getEntry("camMode");
+
+  double offsetAngle = getVerticalOffset();
+  final double mountAngle = 25.0;
+  final double cameraHeight = 92109321;
+  final double rcHeight = 0.925; //Rocket cargo height in meters
+  final double hpHeight = 0.699; //Hatch panel height in meters
+  final double scHeight = 0.710; //Cargo ship height in meters
 
   public double getHorizontalOffset(){
     //Returns x offset angle of the robot from the target
@@ -69,11 +78,18 @@ public class Limelight extends Subsystem {
     return power;
   }
 
-  //Returns true if target is in frame, false is no valid target
   public Boolean validTarget(){
+    //Returns true if target is in frame, false is no valid target
     if (target.getDouble(0) == 1) return true;
     else return false;
   }
+
+  public double distanceToTarget(){
+    //TODO: Configure for multiple targets
+    System.out.println(Math.tan(mountAngle+offsetAngle)/(hpHeight-cameraHeight));
+    return Math.tan(mountAngle+offsetAngle)/(hpHeight-cameraHeight);
+  }
+
   @Override
   public void initDefaultCommand(){
   }

@@ -40,9 +40,9 @@ public class LimeDrive extends Command{
     double minPower = 0.0;
 
     if (Robot.lm.validTarget()){
-      if(Robot.lm.getHorizontalOffset() > 1){
+      if (Robot.lm.getHorizontalOffset() > 1){
         steeringAdjust = Kp * headingError - minPower;
-      }else if(headingError < 1){
+      }else if (headingError < 1){
         steeringAdjust = Kp * headingError + minPower;
       }
     }
