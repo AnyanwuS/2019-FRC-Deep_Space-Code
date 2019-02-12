@@ -13,14 +13,14 @@ import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 public class Roller extends Subsystem {
-  public WPI_VictorSPX RoadRoller = new WPI_VictorSPX(RobotMap.roadRoller);
+  public WPI_TalonSRX feeder = new WPI_TalonSRX(RobotMap.feeder);
   public boolean enabled = false;
 
   public Roller(){
   }
 
   public void setMotor(double power){
-    RoadRoller.set(power);
+    feeder.set(power);
   }
 
   @Override

@@ -9,13 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
-public class ArgonPusher extends Command {
-
-  private boolean ps = Robot.op.pushState;
-
-  public ArgonPusher(){
-      requires(Robot.op);
+public class ConveyorStop extends Command {
+  
+  public ConveyorStop(){
+    requires(Robot.cv);
   }
 
   @Override
@@ -24,14 +23,7 @@ public class ArgonPusher extends Command {
 
   @Override 
   public void execute(){
-    //addSequential(new shiftPiston(true));
-    if (!ps){
-      Robot.op.shiftPiston(true);
-      ps = true;
-    }else{
-      Robot.op.shiftPiston(false);
-      ps = false;
-    }
+    Robot.cv.stop();
   }
 
   @Override

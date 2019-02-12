@@ -6,41 +6,37 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Robot;
-import frc.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class Drive extends Command {
+public class HatchGrabber extends Command {
 
-  public Drive(){
-    requires(Robot.dt);
-    requires(Robot.pdp);
+  private boolean enabled = Robot.ps.enabled;
+
+  public HatchGrabber(){
+      requires(Robot.ps);
   }
-  
+
   @Override
   protected void initialize(){
   }
 
-  //Instances ArcadeDrive with controller input
-  @Override
-  protected void execute(){
-    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY), OI.driver.getRawAxis(OI.rightX));
-    //Checks power draw and current voltage while the robot is driving
-    //System.out.println(Robot.pdp.getInfo().toString());
+  @Override 
+  public void execute(){
   }
 
-  //Command runs indefinitely since there is usu no need to disable driving capability
   @Override
   protected boolean isFinished(){
     return true;
   }
 
-  @Override
-  protected void end(){
+  @Override 
+  public void end(){
   }
 
-  @Override
+  @Override 
   protected void interrupted(){
   }
 }
+

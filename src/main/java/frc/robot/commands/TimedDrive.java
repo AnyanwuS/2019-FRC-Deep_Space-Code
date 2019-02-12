@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TimedDrive extends Command {
 
-    private double x = 0, y = 0;
+    private double x, y;
 
     public TimedDrive(double x, double y, double duration) {
         requires(Robot.dt);
@@ -20,11 +20,9 @@ public class TimedDrive extends Command {
         this.setTimeout(duration);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize(){
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute(){
         Robot.dt.ArcadeDrive(-x, y);
         Timer.delay(0.005);

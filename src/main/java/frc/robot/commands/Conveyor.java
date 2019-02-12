@@ -6,41 +6,36 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Robot;
-import frc.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class Drive extends Command {
-
-  public Drive(){
-    requires(Robot.dt);
-    requires(Robot.pdp);
-  }
+public class Conveyor extends Command {
   
+  public Conveyor(){
+    requires(Robot.cv);
+  }
+
   @Override
   protected void initialize(){
   }
 
-  //Instances ArcadeDrive with controller input
-  @Override
-  protected void execute(){
-    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY), OI.driver.getRawAxis(OI.rightX));
-    //Checks power draw and current voltage while the robot is driving
-    //System.out.println(Robot.pdp.getInfo().toString());
+  @Override 
+  public void execute(){
+    Robot.cv.setMotor(0.50);
   }
 
-  //Command runs indefinitely since there is usu no need to disable driving capability
   @Override
   protected boolean isFinished(){
     return true;
   }
 
-  @Override
-  protected void end(){
+  @Override 
+  public void end(){
   }
 
-  @Override
+  @Override 
   protected void interrupted(){
   }
 }
+

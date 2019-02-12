@@ -8,11 +8,18 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Encoder extends Subsystem {
+import edu.wpi.first.wpilibj.Encoder;
 
+public class Encoders extends Subsystem {
+  private static int encoderPortA = 11, encoderPortB = 12;
+  private  Encoder m_encoder = new Encoder(encoderPortA, encoderPortB);
+
+  public Encoders(){
+    m_encoder.setDistancePerPulse((Math.PI * 4) / 360.0);
+  }
+  
   @Override
   public void initDefaultCommand(){
-    //Set the default command for a subsystem here.
-    //setDefaultCommand(new MySpecialCommand());
+
   }
 }

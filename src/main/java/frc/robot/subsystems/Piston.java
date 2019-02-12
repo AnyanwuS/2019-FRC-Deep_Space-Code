@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 //Pneumatics subsystem
-public class OxygenPusher extends Subsystem {
-  public boolean pushState = false;
+public class Piston extends Subsystem {
+  public boolean enabled = false;
   //Solenoids for the shifter; Only reconfigure if PCM CAN ID changes are necessary
   public DoubleSolenoid leftShifter = new DoubleSolenoid(0,1);
-  public DoubleSolenoid rightShifter = new DoubleSolenoid(3,4);
+  public DoubleSolenoid rightShifter = new DoubleSolenoid(2,3);
 
   public void shiftPiston(Boolean shift){
     if(shift){

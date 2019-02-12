@@ -56,15 +56,14 @@ public class OI {
 	  
   public OI(){
 	  //Bind commands to buttons here
-	  //A.whenPressed(new ArgonPusher());
-	  RB.whileHeld(new LimeDrive());
-	  //TODO: Put on operator controller after autonomous is fully tested
 	  /*TODO: Toggle command to switch direction of arcade drive for teleop
 	  Select.whenPressed(new switchMode());*/
 
 	  /* Switching from input to output requires the roller to pass through an off state
 	  EX: LB (intake) -> RB (off) -> RB (exhaust) */
-	  LB.whenPressed(new FeederIn(0.8));
-	  RB.whenPressed(new FeederOut(-0.6));
+	  //LB.whileHeld(new FeederIn(0.5));
+	  //RB.whileHeld(new FeederOut(-0.5));
+	  A.whenPressed(new Conveyor());
+	  A.whenReleased(new ConveyorStop());
   }
 }

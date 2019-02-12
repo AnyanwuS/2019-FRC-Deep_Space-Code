@@ -26,12 +26,14 @@ import frc.robot.commands.AutoLimeDrive;
   project.
 */
 public class Robot extends TimedRobot {
-
+  //Subsystem instancing
   public static Limelight lm = new Limelight();
   public static DriveTrain dt = new DriveTrain();
-  public static OxygenPusher op = new OxygenPusher();
+  public static Piston ps = new Piston();
   public static PDP pdp = new PDP();
   public static Roller rl = new Roller();
+  public static Conveyors cv = new Conveyors();
+  public static Encoders en = new Encoders();
 
   public static RobotMap rm = new RobotMap();
   public static OI oi = new OI();

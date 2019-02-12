@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FeederOut extends Command {
 
   private double exhaust;
-  private boolean enabled = Robot.rl.enabled;
 
   public FeederOut(double exhaust){
     requires(Robot.rl);
@@ -26,13 +25,6 @@ public class FeederOut extends Command {
 
   @Override
   protected void execute(){
-    if (!enabled){ 
-      Robot.rl.setMotor(this.exhaust);
-      enabled = true;
-    }else{
-      Robot.rl.setMotor(0);
-      enabled = false;
-    }
   }
 
   @Override

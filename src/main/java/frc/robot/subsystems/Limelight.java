@@ -85,7 +85,7 @@ public class Limelight extends Subsystem {
   }
 
   public double distanceToTarget(){
-    //TODO: Configure for multiple targets
+    //TODO: Configure for multiple targets; Method currently finds distance for hatch panel targets in frame
     System.out.println(Math.tan(mountAngle+offsetAngle)/(hpHeight-cameraHeight));
     return Math.tan(mountAngle+offsetAngle)/(hpHeight-cameraHeight);
   }

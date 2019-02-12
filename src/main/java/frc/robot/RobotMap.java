@@ -13,15 +13,16 @@ package frc.robot;
   the wiring easier and significantly reduces the number of magic numbers floating around.
 */
 public class RobotMap {
-  //Maps to CAN ID of motors
+  //CIM motor CAN IDs
   public static int leftMaster = 11;
   public static int leftSlave = 12;
   public static int rightMaster = 13;
   public static int rightSlave = 14;
   public static int leftDonkey = 16;
   public static int rightDonkey = 15;
-  public static int roadRoller = 17;
-
+  //775 motor CAN IDs
+  public static int feeder = 17;
+  public static int conveyor = 18;
   /*
     If you are using multiple modules, make sure to define
     both the port number and the module as separate variables

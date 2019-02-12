@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FeederIn extends Command {
 
   private double intake;
-  private boolean enabled = Robot.rl.enabled;
 
   public FeederIn(double intake){
     requires(Robot.rl);
@@ -25,13 +24,6 @@ public class FeederIn extends Command {
 
   @Override
   protected void execute(){
-    if (!enabled){ 
-      Robot.rl.setMotor(this.intake);
-      enabled = true;
-    }else{
-      Robot.rl.setMotor(0);
-      enabled = false;
-    }
   }
 
   @Override
