@@ -12,11 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class FeederOut extends Command {
 
-  private double exhaust;
-
   public FeederOut(double exhaust){
-    requires(Robot.rl);
-    this.exhaust = -exhaust;
+    requires(Robot.fr);
   }
 
   @Override

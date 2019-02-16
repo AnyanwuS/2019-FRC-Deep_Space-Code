@@ -7,16 +7,16 @@
 
 package frc.robot;
 import frc.robot.commands.*;
+import frc.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /*
-	This class is the glue that binds the controls on the physical operator
-	interface (controller) to the commands and command groups that allow control of the robot.
+This class is the glue that binds the controls on the physical operator
+interface (controller) to the commands and command groups that allow control of the robot.
 */
-
 public class OI {
 	//Driver: Drivetrain control, Operator: Other functions
 	public static Joystick driver = new Joystick(0);
@@ -29,23 +29,23 @@ public class OI {
 	*/
 
 	//Attach raw button inputs to their corresponding names
-	static Button A = new JoystickButton(driver, 1);
-	static Button B = new JoystickButton(driver, 2);
-	static Button X = new JoystickButton(driver, 3);
-	static Button Y = new JoystickButton(driver, 4);
-	static Button LB = new JoystickButton(driver, 5);
-	static Button RB = new JoystickButton(driver, 6);
-	static Button Start = new JoystickButton(driver, 7);
-	static Button Select = new JoystickButton(driver, 8);
+	Button A = new JoystickButton(driver, 1);
+	Button B = new JoystickButton(driver, 2);
+	Button X = new JoystickButton(driver, 3);
+	Button Y = new JoystickButton(driver, 4);
+	Button LB = new JoystickButton(driver, 5);
+	Button RB = new JoystickButton(driver, 6);
+	Button Start = new JoystickButton(driver, 7);
+	Button Select = new JoystickButton(driver, 8);
 
-	static Button opA = new JoystickButton(operator, 1);
-	static Button opB = new JoystickButton(operator, 2);
-	static Button opX = new JoystickButton(operator, 3);
-	static Button opY = new JoystickButton(operator, 4);
-	static Button opLB = new JoystickButton(operator, 5);
-	static Button opRB = new JoystickButton(operator, 6);
-	static Button opStart = new JoystickButton(operator, 7);
-	static Button opSelect = new JoystickButton(operator, 8);
+	Button opA = new JoystickButton(operator, 1);
+	Button opB = new JoystickButton(operator, 2);
+	Button opX = new JoystickButton(operator, 3);
+	Button opY = new JoystickButton(operator, 4);
+	Button opLB = new JoystickButton(operator, 5);
+	Button opRB = new JoystickButton(operator, 6);
+	Button opStart = new JoystickButton(operator, 7);
+	Button opSelect = new JoystickButton(operator, 8);
 	
 	public static int leftX = 0;
 	public static int leftY = 1;
@@ -58,12 +58,14 @@ public class OI {
 	  //Bind commands to buttons here
 	  /*TODO: Toggle command to switch direction of arcade drive for teleop
 	  Select.whenPressed(new switchMode());*/
-
-	  /* Switching from input to output requires the roller to pass through an off state
-	  EX: LB (intake) -> RB (off) -> RB (exhaust) */
-	  //LB.whileHeld(new FeederIn(0.5));
-	  //RB.whileHeld(new FeederOut(-0.5));
-	  A.whenPressed(new Conveyor());
-	  A.whenReleased(new ConveyorStop());
-  }
+	  A.toggleWhenPressed(new Belt());
+	  Y.whenPressed(new Pivot());
+	  RB.whenPressed(new Extender());
+	  LB.whenPressed(new Claw());
+	  /*
+	  TODO: Rewrite motor constructors to take power parameters;
+	  Write a Config.java with constants to easily adjust motor power &
+	  other constants
+	  */
+  }	
 }

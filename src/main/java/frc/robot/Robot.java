@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.Drive;
+import frc.robot.commands.*;
+import frc.robot.commands.groups.*;
 import frc.robot.subsystems.*;
-
-import frc.robot.commands.AutoLimeDrive;
 
 /*
   The VM is configured to automatically run this class, and to call the
@@ -28,15 +27,13 @@ import frc.robot.commands.AutoLimeDrive;
 public class Robot extends TimedRobot {
   //Subsystem instancing
   public static Limelight lm = new Limelight();
-  public static DriveTrain dt = new DriveTrain();
-  public static Piston ps = new Piston();
-  public static PDP pdp = new PDP();
-  public static Roller rl = new Roller();
-  public static Conveyors cv = new Conveyors();
-  public static Encoders en = new Encoders();
+  public static Drivetrain dt = new Drivetrain();
+  public static HatchGrabber hg = new HatchGrabber();
+  public static Feeder fr = new Feeder();
+  public static Conveyor cv = new Conveyor();
 
   public static RobotMap rm = new RobotMap();
-  public static OI oi = new OI();
+  public static OI oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();

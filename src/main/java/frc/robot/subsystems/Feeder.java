@@ -11,21 +11,39 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.*;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class Roller extends Subsystem {
+public class Feeder extends Subsystem {
+  
   public WPI_TalonSRX feeder = new WPI_TalonSRX(RobotMap.feeder);
-  public boolean enabled = false;
+  public DoubleSolenoid pusher = new DoubleSolenoid(2,3);
 
-  public Roller(){
+  public Feeder(){
   }
 
-  public void setMotor(double power){
+  public void setPower(double power){
     feeder.set(power);
+  }
+
+  public void raiseFeeder(){
+    switch (pusher.get()){
+      case kOff:
+        pusher.set(DoubleSolenoid.Value.kForward);
+        break;
+      case kForward:
+        pusher.set(DoubleSolenoid.Value.kReverse);
+        break;
+      case kReverse:
+        pusher.set(DoubleSolenoid.Value.kForward);
+        break;
+    }
+  }
+  
+  public void stop(){
+    feeder.set(0.0);
   }
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }

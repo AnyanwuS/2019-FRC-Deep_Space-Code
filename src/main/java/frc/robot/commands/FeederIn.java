@@ -11,11 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class FeederIn extends Command {
 
-  private double intake;
-
   public FeederIn(double intake){
-    requires(Robot.rl);
-    this.intake = intake;
+    requires(Robot.fr);
   }
 
   @Override
@@ -24,6 +21,7 @@ public class FeederIn extends Command {
 
   @Override
   protected void execute(){
+
   }
 
   @Override
@@ -37,5 +35,6 @@ public class FeederIn extends Command {
 
   @Override
   protected void interrupted(){
+    end();
   }
 }

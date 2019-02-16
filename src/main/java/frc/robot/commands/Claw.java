@@ -7,16 +7,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-//Example CommandGroup
-public class ExampleGroup extends CommandGroup {
-  /*
-  CommandGroups are able to run multiple commands either sequentially on in parallel
-  addSequential(new Command()) statements will run the parametrized commands in the order they are called
-  addParallel(new Command()) statements will run commands at the same time as other commands called with addParallel()
-  */
-  public ExampleGroup(){
-    
+public class Claw extends Command {
+  public Claw() {
+    requires(Robot.hg);
+  }
+
+  @Override
+  protected void initialize(){
+  }
+
+  @Override
+  protected void execute(){
+    Robot.hg.shiftPiston(Robot.hg.holder);
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return true;
+  }
+
+  @Override
+  protected void end() {
+  }
+
+  @Override
+  protected void interrupted() {
   }
 }

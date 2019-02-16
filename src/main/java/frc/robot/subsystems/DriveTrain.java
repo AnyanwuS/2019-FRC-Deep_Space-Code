@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -15,7 +14,7 @@ import frc.robot.commands.Drive;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
   //Declare TalonSRX motors
   public WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.leftMaster);
   public WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.rightMaster);
@@ -34,9 +33,8 @@ public class DriveTrain extends Subsystem {
   */
 
   public DifferentialDrive dd = new DifferentialDrive(frontLeft, frontRight);
-  public PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-  public DriveTrain(){
+  public Drivetrain(){
     //Sets rear motors to follow rotation of the primary motors
     dd.setSafetyEnabled(false);
     rearLeft.follow(frontLeft);

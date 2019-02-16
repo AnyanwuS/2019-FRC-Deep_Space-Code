@@ -9,11 +9,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 
-public class ConveyorStop extends Command {
-  
-  public ConveyorStop(){
+public class Belt extends Command {
+
+  public Belt(){
     requires(Robot.cv);
   }
 
@@ -22,21 +21,23 @@ public class ConveyorStop extends Command {
   }
 
   @Override 
-  public void execute(){
-    Robot.cv.stop();
+  protected void execute(){
+    Robot.cv.setPower(0.5);
   }
 
   @Override
   protected boolean isFinished(){
-    return true;
+    return false;
   }
 
   @Override 
-  public void end(){
+  protected void end(){
+    Robot.cv.stop();
   }
 
-  @Override 
+  @Override
   protected void interrupted(){
+    end();
   }
 }
 

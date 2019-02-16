@@ -10,12 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchGrabber extends Command {
+public class Extender extends Command {
 
-  private boolean enabled = Robot.ps.enabled;
-
-  public HatchGrabber(){
-      requires(Robot.ps);
+  public Extender(){
+      requires(Robot.hg);
   }
 
   @Override
@@ -24,6 +22,7 @@ public class HatchGrabber extends Command {
 
   @Override 
   public void execute(){
+    Robot.hg.shiftPiston(Robot.hg.extender);
   }
 
   @Override
