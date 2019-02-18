@@ -7,12 +7,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class Claw extends Command {
-  public Claw() {
-    requires(Robot.hg);
+public class FD_Exhaust extends Command {
+
+  private double power = 0.0;
+
+  public FD_Exhaust(double power){
+    requires(Robot.fd);
+    this.power = -power;
   }
 
   @Override
@@ -21,19 +25,21 @@ public class Claw extends Command {
 
   @Override
   protected void execute(){
-    Robot.hg.shiftPiston(Robot.hg.holder);
+    Robot.fd.setPower(power);
   }
 
   @Override
-  protected boolean isFinished() {
-    return true;
+  protected boolean isFinished(){
+    return false;
   }
 
   @Override
-  protected void end() {
+  protected void end(){
+    Robot.fd.stop();
   }
 
   @Override
-  protected void interrupted() {
+  protected void interrupted(){
+    end();
   }
 }

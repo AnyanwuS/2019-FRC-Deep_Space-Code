@@ -6,14 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FeederOut extends Command {
+public class FD_Intake extends Command {
 
-  public FeederOut(double exhaust){
-    requires(Robot.fr);
+  private double power = 0.0;
+
+  public FD_Intake(double power){
+    requires(Robot.fd);
+    this.power = power;
   }
 
   @Override
@@ -22,6 +24,7 @@ public class FeederOut extends Command {
 
   @Override
   protected void execute(){
+    Robot.fd.setPower(power);
   }
 
   @Override
@@ -31,9 +34,11 @@ public class FeederOut extends Command {
 
   @Override
   protected void end(){
+    Robot.fd.stop();
   }
 
   @Override
   protected void interrupted(){
+    end();
   }
 }

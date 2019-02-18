@@ -35,5 +35,6 @@ public class HatchGrabber extends Subsystem {
   
   @Override
   public void initDefaultCommand(){
+    setDefaultCommand(null);
   }
 }

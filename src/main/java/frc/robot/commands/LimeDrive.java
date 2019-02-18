@@ -35,7 +35,6 @@ public class LimeDrive extends Command{
     */
     double headingError = Robot.lm.getHorizontalOffset();
     double steeringAdjust = 0.0f;
-    //TODO: Put Kp and minPower in a config file
     double Kp = 0.07;
     double minPower = 0.0;
 

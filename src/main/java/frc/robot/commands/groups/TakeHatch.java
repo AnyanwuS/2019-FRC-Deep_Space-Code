@@ -18,7 +18,7 @@ public class TakeHatch extends CommandGroup {
   addParallel(new Command()) statements will run commands at the same time as other commands called with addParallel()
   */
   public TakeHatch(){
-    addSequential(new Extender(), 0.25);
-    addSequential(new Claw(), 0.25);
+    addSequential(new HG_Extender(), 0.50);
+    addSequential(new HG_Claw(), 0.25);
   }
 }

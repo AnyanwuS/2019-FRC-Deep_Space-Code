@@ -44,6 +44,7 @@ public class Feeder extends Subsystem {
   }
 
   @Override
-  public void initDefaultCommand() {
+  public void initDefaultCommand(){
+    setDefaultCommand(null);
   }
 }

@@ -10,19 +10,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Extender extends Command {
+public class CV_Pivot extends Command {
 
-  public Extender(){
-      requires(Robot.hg);
+  public CV_Pivot() {
+    requires(Robot.cv);
   }
 
   @Override
   protected void initialize(){
   }
-
-  @Override 
-  public void execute(){
-    Robot.hg.shiftPiston(Robot.hg.extender);
+  
+  @Override
+  protected void execute(){
+    Robot.cv.raisePivot();
   }
 
   @Override
@@ -30,12 +30,11 @@ public class Extender extends Command {
     return true;
   }
 
-  @Override 
-  public void end(){
+  @Override
+  protected void end(){
   }
 
-  @Override 
+  @Override
   protected void interrupted(){
   }
 }
-

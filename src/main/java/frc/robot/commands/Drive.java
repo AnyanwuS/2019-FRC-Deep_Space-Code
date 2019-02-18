@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Drive extends Command {
   
-  public Drive(){
+  private int direction = 1;
+
+  public Drive(int direction){
     requires(Robot.dt);
+    this.direction = direction;
   }
   
   @Override
@@ -24,7 +27,7 @@ public class Drive extends Command {
   //Instances ArcadeDrive with controller input
   @Override
   protected void execute(){
-    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY), OI.driver.getRawAxis(OI.rightX));
+    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY)*direction, OI.driver.getRawAxis(OI.rightX));
   }
 
   @Override

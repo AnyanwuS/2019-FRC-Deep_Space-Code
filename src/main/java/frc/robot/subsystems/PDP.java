@@ -27,5 +27,6 @@ public class PDP extends Subsystem {
 
   @Override
   public void initDefaultCommand(){
+    setDefaultCommand(null);
   }
 }

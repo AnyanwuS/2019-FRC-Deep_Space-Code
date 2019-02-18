@@ -10,10 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Belt extends Command {
+public class HG_Extender extends Command {
 
-  public Belt(){
-    requires(Robot.cv);
+  public HG_Extender(){
+      requires(Robot.hg);
   }
 
   @Override
@@ -21,23 +21,21 @@ public class Belt extends Command {
   }
 
   @Override 
-  protected void execute(){
-    Robot.cv.setPower(0.5);
+  public void execute(){
+    Robot.hg.shiftPiston(Robot.hg.extender);
   }
 
   @Override
   protected boolean isFinished(){
-    return false;
+    return true;
   }
 
   @Override 
-  protected void end(){
-    Robot.cv.stop();
+  public void end(){
   }
 
-  @Override
+  @Override 
   protected void interrupted(){
-    end();
   }
 }
 

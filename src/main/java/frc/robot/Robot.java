@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
   public static Limelight lm = new Limelight();
   public static Drivetrain dt = new Drivetrain();
   public static HatchGrabber hg = new HatchGrabber();
-  public static Feeder fr = new Feeder();
+  public static Feeder fd = new Feeder();
   public static Conveyor cv = new Conveyor();
 
   public static RobotMap rm = new RobotMap();
@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   public void robotInit(){
     oi = new OI();
     //TODO: Add drive modes (autonomous) to SmartDashboard here and in autonomousInit()
-    m_chooser.setDefaultOption("Teleop Drive", new Drive());
+    m_chooser.setDefaultOption("Teleop Drive", new Drive(1));
     m_chooser.addOption("Auto Drive", new AutoLimeDrive());
     SmartDashboard.putData("Teleop", m_chooser);
   }

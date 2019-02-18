@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 import frc.robot.commands.Drive;
-//Imports CAN controllers like the ViktorSPX and TalonSRX
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -33,14 +34,22 @@ public class Drivetrain extends Subsystem {
   */
 
   public DifferentialDrive dd = new DifferentialDrive(frontLeft, frontRight);
+  final int kTimeoutMs = 30;
 
   public Drivetrain(){
     //Sets rear motors to follow rotation of the primary motors
-    dd.setSafetyEnabled(false);
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
     middleLeft.follow(frontLeft);
     middleRight.follow(frontRight);
+
+    //Configure encoders for master motors
+    /*
+    frontLeft.configSelectedFeedbackSensor(
+      FeedbackDevice.CTRE_MagEncoder_Relative,0,kTimeoutMs);
+    frontRight.configSelectedFeedbackSensor(
+      FeedbackDevice.CTRE_MagEncoder_Relative,0,kTimeoutMs);
+      */
   }
 
   public void ArcadeDrive (double x, double rotation){
@@ -50,6 +59,6 @@ public class Drivetrain extends Subsystem {
 
   @Override
   public void initDefaultCommand(){
-    setDefaultCommand(new Drive());
+    setDefaultCommand(new Drive(1));
   }
 }

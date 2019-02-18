@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+import frc.robot.Config;
 import java.lang.Math;
 
 public class Limelight extends Subsystem {
@@ -27,11 +28,6 @@ public class Limelight extends Subsystem {
   public NetworkTableEntry cameraMode = ll.getEntry("camMode");
 
   double offsetAngle = getVerticalOffset();
-  final double mountAngle = 25.0;
-  final double cameraHeight = 92109321;
-  final double rcHeight = 0.925; //Rocket cargo height in meters
-  final double hpHeight = 0.699; //Hatch panel height in meters
-  final double scHeight = 0.710; //Cargo ship height in meters
 
   public double getHorizontalOffset(){
     //Returns x offset angle of the robot from the target
@@ -86,11 +82,12 @@ public class Limelight extends Subsystem {
 
   public double distanceToTarget(){
     //TODO: Configure for multiple targets; Method currently finds distance for hatch panel targets in frame
-    System.out.println(Math.tan(mountAngle+offsetAngle)/(hpHeight-cameraHeight));
-    return Math.tan(mountAngle+offsetAngle)/(hpHeight-cameraHeight);
+    System.out.println(Math.tan(Config.mountAngle+offsetAngle)/(Config.hpHeight-Config.cameraHeight));
+    return Math.tan(Config.mountAngle+offsetAngle)/(Config.hpHeight-Config.cameraHeight);
   }
 
   @Override
   public void initDefaultCommand(){
+    setDefaultCommand(null);
   }
 }
