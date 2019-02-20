@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems; 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -38,6 +38,7 @@ public class Drivetrain extends Subsystem {
 
   public Drivetrain(){
     //Sets rear motors to follow rotation of the primary motors
+    dd.setSafetyEnabled(false);
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
     middleLeft.follow(frontLeft);
@@ -49,7 +50,7 @@ public class Drivetrain extends Subsystem {
       FeedbackDevice.CTRE_MagEncoder_Relative,0,kTimeoutMs);
     frontRight.configSelectedFeedbackSensor(
       FeedbackDevice.CTRE_MagEncoder_Relative,0,kTimeoutMs);
-      */
+    */
   }
 
   public void ArcadeDrive (double x, double rotation){
@@ -59,6 +60,6 @@ public class Drivetrain extends Subsystem {
 
   @Override
   public void initDefaultCommand(){
-    setDefaultCommand(new Drive(1));
+    setDefaultCommand(new Drive());
   }
 }

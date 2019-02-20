@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   public void robotInit(){
     oi = new OI();
     //TODO: Add drive modes (autonomous) to SmartDashboard here and in autonomousInit()
-    m_chooser.setDefaultOption("Teleop Drive", new Drive(1));
+    m_chooser.setDefaultOption("Teleop Drive", new Drive());
     m_chooser.addOption("Auto Drive", new AutoLimeDrive());
     SmartDashboard.putData("Teleop", m_chooser);
   }

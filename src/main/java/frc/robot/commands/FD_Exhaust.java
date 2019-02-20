@@ -10,6 +10,8 @@ package frc.robot.commands;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class FD_Exhaust extends Command {
 
   private double power = 0.0;
@@ -26,6 +28,7 @@ public class FD_Exhaust extends Command {
   @Override
   protected void execute(){
     Robot.fd.setPower(power);
+    Timer.delay(0.005);
   }
 
   @Override

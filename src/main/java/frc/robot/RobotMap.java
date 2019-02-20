@@ -21,8 +21,8 @@ public class RobotMap {
   public static int leftDonkey = 16;
   public static int rightDonkey = 15;
   //775 motor CAN IDs
-  public static int feeder = 17;
-  public static int conveyor = 18;
+  public static int conveyor = 17;
+  public static int feeder = 18;
   /*
     If you are using multiple modules, make sure to define
     both the port number and the module as separate variables

@@ -9,15 +9,13 @@ package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.OI;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Drive extends Command {
-  
-  private int direction = 1;
 
-  public Drive(int direction){
+  public Drive(){
     requires(Robot.dt);
-    this.direction = direction;
   }
   
   @Override
@@ -27,12 +25,13 @@ public class Drive extends Command {
   //Instances ArcadeDrive with controller input
   @Override
   protected void execute(){
-    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY)*direction, OI.driver.getRawAxis(OI.rightX));
+    Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY), OI.driver.getRawAxis(OI.rightX));
+    Timer.delay(0.005);
   }
 
   @Override
   protected boolean isFinished(){
-    return true;
+    return false;
   }
 
   @Override

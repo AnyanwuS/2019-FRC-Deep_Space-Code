@@ -46,25 +46,25 @@ public class OI {
 	Button opRB = new JoystickButton(operator, 6);
 	Button opStart = new JoystickButton(operator, 7);
 	Button opSelect = new JoystickButton(operator, 8);
+	/*
+	Button dUp = new POVButton(driver, 0, 9);
+	Button dUpRight = new POVButton(driver, 45, 10);
+	Button dRight = new POVButton(driver, 90, 11);
+	Button dDownRight = new POVButton(driver, 135, 12);
+	Button dDown = new POVButton(driver, 180, 13);
+	Button dDownLeft = new POVButton(driver, 225, 14);
+	Button dLeft = new POVButton(driver, 270, 15);
+	Button dUpLeft = new POVButton(driver, 325, 16);
 
-	Button dUp = new POVButton(driver, 0, 0);
-	Button dUpRight = new POVButton(driver, 45, 1);
-	Button dRight = new POVButton(driver, 90, 2);
-	Button dDownRight = new POVButton(driver, 135, 3);
-	Button dDown = new POVButton(driver, 180, 4);
-	Button dDownLeft = new POVButton(driver, 225, 5);
-	Button dLeft = new POVButton(driver, 270, 6);
-	Button dUpLeft = new POVButton(driver, 325, 7);
-
-	Button opdUp = new POVButton(operator, 0, 0);
-	Button opdUpRight = new POVButton(operator, 45, 1);
-	Button opdRight = new POVButton(operator, 90, 2);
-	Button opdDownRight = new POVButton(operator, 135, 3);
-	Button opdDown = new POVButton(operator, 180, 4);
-	Button opdDownLeft = new POVButton(operator, 225, 5);
-	Button opdLeft = new POVButton(operator, 270, 6);
-	Button opdUpLeft = new POVButton(operator, 325, 7);
-
+	Button opdUp = new POVButton(operator, 0, 9);
+	Button opdUpRight = new POVButton(operator, 45, 10);
+	Button opdRight = new POVButton(operator, 90, 11);
+	Button opdDownRight = new POVButton(operator, 135, 12);
+	Button opdDown = new POVButton(operator, 180, 13);
+	Button opdDownLeft = new POVButton(operator, 225, 14);
+	Button opdLeft = new POVButton(operator, 270, 15);
+	Button opdUpLeft = new POVButton(operator, 325, 16);
+	*/
 	public static int leftX = 0;
 	public static int leftY = 1;
 	public static int rightX = 4;
@@ -74,16 +74,18 @@ public class OI {
 	  
   public OI(){
 	//Bind commands to buttons here
-	/*TODO: Toggle command to switch direction of arcade drive for teleop
-	Select.whenPressed(new switchMode());*/
+	//
 	A.toggleWhenPressed(new CV_Belt(Config.beltPower));
 	B.whenPressed(new CV_Pivot());
+
 	RB.whenPressed(new HG_Extender());
 	LB.whenPressed(new HG_Claw());
-	dUp.toggleWhenPressed(new FD_Intake(Config.feederIntakePower));
-	dDown.toggleWhenPressed(new FD_Exhaust(Config.feederExhaustPower));
 
-	Start.toggleWhenPressed(new Drive(-1));
+	Select.whenPressed(new FD_Pivot());
+	Y.toggleWhenPressed(new FD_Intake(Config.feederIntakePower));
+	X.toggleWhenPressed(new FD_Exhaust(Config.feederExhaustPower));
+
+	//Start.toggleWhenPressed(new Drive());
 
 	/* TODO: Rewrite motor constructors to take power parameters;
 	Write a Config.java with constants to easily adjust motor power &

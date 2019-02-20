@@ -9,40 +9,32 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.Timer;
 
-public class CV_Belt extends Command {
+public class FD_Pivot extends Command {
 
-  private double power = 0.0;
-
-  public CV_Belt(double power){
-    requires(Robot.cv);
-    this.power = power;
+  public FD_Pivot() {
+    requires(Robot.fd);
   }
 
   @Override
   protected void initialize(){
   }
-
-  @Override 
+  
+  @Override
   protected void execute(){
-    Robot.cv.setPower(power);
-    Timer.delay(0.005);
+    Robot.fd.raiseFeeder();
   }
 
   @Override
   protected boolean isFinished(){
-    return false;
+    return true;
   }
 
-  @Override 
+  @Override
   protected void end(){
-    Robot.cv.stop();
   }
 
   @Override
   protected void interrupted(){
-    end();
   }
 }
-
