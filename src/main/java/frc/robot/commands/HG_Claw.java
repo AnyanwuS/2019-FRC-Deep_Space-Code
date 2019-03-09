@@ -21,7 +21,7 @@ public class HG_Claw extends Command {
 
   @Override
   protected void execute(){
-    Robot.hg.shiftPiston(Robot.hg.holder);
+    Robot.hg.shiftPiston(Robot.hg.claw);
   }
 
   @Override

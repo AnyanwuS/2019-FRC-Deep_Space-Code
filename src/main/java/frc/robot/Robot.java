@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit(){
     //Cancels autonomous mode upon initializing operator control
+    lm.camMode(1);
     if (m_autonomousCommand != null){
       m_autonomousCommand.cancel();
     }

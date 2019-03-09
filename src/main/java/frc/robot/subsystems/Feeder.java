@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Feeder extends Subsystem {
   
   public WPI_TalonSRX feeder = new WPI_TalonSRX(RobotMap.feeder);
-  public DoubleSolenoid pusher = new DoubleSolenoid(2,3);
+  public DoubleSolenoid pusher = new DoubleSolenoid(0,2,3);
 
   public Feeder(){
   }

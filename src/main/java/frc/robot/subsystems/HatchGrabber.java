@@ -16,8 +16,9 @@ Holder solenoid handles the claw, while extender solenoid handles
 the extension and retraction the grabber
 */
 public class HatchGrabber extends Subsystem {
-  public DoubleSolenoid holder = new DoubleSolenoid(4,5);
-  public DoubleSolenoid extender = new DoubleSolenoid(6,7);
+  public DoubleSolenoid claw = new DoubleSolenoid(0,4,5);
+  public DoubleSolenoid initExtend = new DoubleSolenoid(1,0,1);
+  public DoubleSolenoid fullExtend = new DoubleSolenoid(0,6,7);
 
   public void shiftPiston(DoubleSolenoid piston){
     switch (piston.get()){

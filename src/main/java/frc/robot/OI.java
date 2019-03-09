@@ -12,7 +12,7 @@ import frc.robot.commands.groups.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
-import frc.robot.Config;
+import frc.robot.RobotMap;
 /*
 This class is the glue that binds the controls on the physical operator
 interface (controller) to the commands and command groups that allow control of the robot.
@@ -46,25 +46,26 @@ public class OI {
 	Button opRB = new JoystickButton(operator, 6);
 	Button opStart = new JoystickButton(operator, 7);
 	Button opSelect = new JoystickButton(operator, 8);
-	/*
-	Button dUp = new POVButton(driver, 0, 9);
-	Button dUpRight = new POVButton(driver, 45, 10);
-	Button dRight = new POVButton(driver, 90, 11);
-	Button dDownRight = new POVButton(driver, 135, 12);
-	Button dDown = new POVButton(driver, 180, 13);
-	Button dDownLeft = new POVButton(driver, 225, 14);
-	Button dLeft = new POVButton(driver, 270, 15);
-	Button dUpLeft = new POVButton(driver, 325, 16);
 
-	Button opdUp = new POVButton(operator, 0, 9);
-	Button opdUpRight = new POVButton(operator, 45, 10);
-	Button opdRight = new POVButton(operator, 90, 11);
-	Button opdDownRight = new POVButton(operator, 135, 12);
-	Button opdDown = new POVButton(operator, 180, 13);
-	Button opdDownLeft = new POVButton(operator, 225, 14);
-	Button opdLeft = new POVButton(operator, 270, 15);
-	Button opdUpLeft = new POVButton(operator, 325, 16);
+	Button dUp = new POVButton(driver, 0);
+	Button dUpRight = new POVButton(driver, 45);
+	Button dRight = new POVButton(driver, 90);
+	Button dDownRight = new POVButton(driver, 135);
+	Button dDown = new POVButton(driver, 180);
+	Button dDownLeft = new POVButton(driver, 225);
+	Button dLeft = new POVButton(driver, 270);
+	Button dUpLeft = new POVButton(driver, 325);
+	/*
+	Button opdUp = new POVButton(operator, 0);
+	Button opdUpRight = new POVButton(operator, 45);
+	Button opdRight = new POVButton(operator, 90);
+	Button opdDownRight = new POVButton(operator, 135);
+	Button opdDown = new POVButton(operator, 180);
+	Button opdDownLeft = new POVButton(operator, 225);
+	Button opdLeft = new POVButton(operator, 270);
+	Button opdUpLeft = new POVButton(operator, 325);
 	*/
+
 	public static int leftX = 0;
 	public static int leftY = 1;
 	public static int rightX = 4;
@@ -74,21 +75,19 @@ public class OI {
 	  
   public OI(){
 	//Bind commands to buttons here
-	//
-	A.toggleWhenPressed(new CV_Belt(Config.beltPower));
-	B.whenPressed(new CV_Pivot());
+	A.whileHeld(new CV_Belt(RobotMap.beltPower));
+	B.whileHeld(new CV_Belt(-RobotMap.beltPower));
+	X.whileHeld(new FD_Roller(-RobotMap.feederPower));
+	Y.whileHeld(new FD_Roller(RobotMap.feederPower));
 
-	RB.whenPressed(new HG_Extender());
-	LB.whenPressed(new HG_Claw());
 
-	Select.whenPressed(new FD_Pivot());
-	Y.toggleWhenPressed(new FD_Intake(Config.feederIntakePower));
-	X.toggleWhenPressed(new FD_Exhaust(Config.feederExhaustPower));
+	dUp.toggleWhenPressed(new CV_Pivot());
+	dDown.toggleWhenPressed(new FD_Pivot());
+	dLeft.toggleWhenPressed(new HG_InitExtend());
+	dRight.toggleWhenPressed(new HG_FullExtend());
+	
+	RB.toggleWhenPressed(new HG_Claw());
 
-	//Start.toggleWhenPressed(new Drive());
-
-	/* TODO: Rewrite motor constructors to take power parameters;
-	Write a Config.java with constants to easily adjust motor power &
-	other constants */
+	//Start.whenPressed(new AutoDrive());
   }	
 }

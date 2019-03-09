@@ -10,11 +10,11 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Timer;
 
-public class FD_Intake extends Command {
+public class FD_Roller extends Command {
 
   private double power = 0.0;
 
-  public FD_Intake(double power){
+  public FD_Roller(double power){
     requires(Robot.fd);
     this.power = power;
   }

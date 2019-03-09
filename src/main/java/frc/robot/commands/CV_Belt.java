@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class CV_Belt extends Command {
 
+  
   private double power = 0.0;
 
   public CV_Belt(double power){

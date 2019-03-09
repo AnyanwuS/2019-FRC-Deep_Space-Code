@@ -5,36 +5,47 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems; 
+package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 import frc.robot.commands.Drive;
-
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
+import jaci.pathfinder.modifiers.TankModifier;
+
 public class Drivetrain extends Subsystem {
-  //Declare TalonSRX motors
+  //Motor controllers for drivetrain
   public WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.leftMaster);
   public WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.rightMaster);
-  public WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.leftSlave);
-  public WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.rightSlave);
-  public WPI_TalonSRX middleLeft = new WPI_TalonSRX(RobotMap.leftDonkey);
-  public WPI_TalonSRX middleRight = new WPI_TalonSRX(RobotMap.rightDonkey);
-
-  /*Initialize Viktor controllers
-  public WPI_VictorSPX frontLeft = new WPI_VictorSPX(RobotMap.leftMaster);
-  public WPI_VictorSPX frontRight = new WPI_VictorSPX(RobotMap.rightMaster);
   public WPI_VictorSPX rearLeft = new WPI_VictorSPX(RobotMap.leftSlave);
   public WPI_VictorSPX rearRight = new WPI_VictorSPX(RobotMap.rightSlave);
-  public WPI_VictorSPX middleRight = new WPI_VictorSPX(RobotMap.rightDonkey);
   public WPI_VictorSPX middleLeft = new WPI_VictorSPX(RobotMap.leftDonkey);
-  */
+  public WPI_VictorSPX middleRight = new WPI_VictorSPX(RobotMap.rightDonkey);
 
   public DifferentialDrive dd = new DifferentialDrive(frontLeft, frontRight);
-  final int kTimeoutMs = 30;
+  //Fit, samples, dt, maxV, maxA, maxJ 
+  public Trajectory.Config config = new Trajectory.Config(
+      Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 
+      0.05, 3.48, 10.5, 60.0);
+
+  Waypoint[] points = new Waypoint[] {
+    new Waypoint(-4, -1, Pathfinder.d2r(-45)),
+    new Waypoint(-2, -2, 0),
+    new Waypoint(0, 16, 0)
+  };
+
+  public TankModifier createTrajectory(){
+    // Wheelbase Width = 0.5m
+    Trajectory trajectory = Pathfinder.generate(points, config);
+    TankModifier modifier = new TankModifier(trajectory).modify(0.524);
+    return modifier;
+  }
 
   public Drivetrain(){
     //Sets rear motors to follow rotation of the primary motors
@@ -43,19 +54,25 @@ public class Drivetrain extends Subsystem {
     rearRight.follow(frontRight);
     middleLeft.follow(frontLeft);
     middleRight.follow(frontRight);
-
-    //Configure encoders for master motors
-    /*
-    frontLeft.configSelectedFeedbackSensor(
-      FeedbackDevice.CTRE_MagEncoder_Relative,0,kTimeoutMs);
-    frontRight.configSelectedFeedbackSensor(
-      FeedbackDevice.CTRE_MagEncoder_Relative,0,kTimeoutMs);
-    */
+  
+    frontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    frontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   public void ArcadeDrive (double x, double rotation){
     //Motion in the -x direction is actually forward
     dd.arcadeDrive(-x, rotation);
+  }
+  
+  public double[] encoderVelocity(){
+    //Returns velocity 
+    double[] velocity = new double[2];
+    double wheelCircumference = 0.216*Math.PI;
+    velocity[0] = ((frontLeft.getSelectedSensorVelocity()
+    /4096)*wheelCircumference)/10;
+    velocity[1] = ((frontRight.getSelectedSensorVelocity()
+    /4096)*wheelCircumference)/10;
+    return velocity;
   }
 
   @Override

@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 public class Conveyor extends Subsystem {
 
   public WPI_TalonSRX conveyor = new WPI_TalonSRX(RobotMap.conveyor);
-  public DoubleSolenoid pusher = new DoubleSolenoid(0,1);
+  public DoubleSolenoid pusher = new DoubleSolenoid(0,0,1);
 
   public void setPower(double power){
     conveyor.set(-power);
