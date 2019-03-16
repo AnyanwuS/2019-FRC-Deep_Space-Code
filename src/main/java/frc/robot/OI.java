@@ -35,8 +35,8 @@ public class OI {
 	Button Y = new JoystickButton(driver, 4);
 	Button LB = new JoystickButton(driver, 5);
 	Button RB = new JoystickButton(driver, 6);
-	Button Start = new JoystickButton(driver, 7);
-	Button Select = new JoystickButton(driver, 8);
+	Button Back = new JoystickButton(driver, 7);
+	Button Start = new JoystickButton(driver, 8);
 
 	Button opA = new JoystickButton(operator, 1);
 	Button opB = new JoystickButton(operator, 2);
@@ -55,7 +55,7 @@ public class OI {
 	Button dDownLeft = new POVButton(driver, 225);
 	Button dLeft = new POVButton(driver, 270);
 	Button dUpLeft = new POVButton(driver, 325);
-	/*
+	
 	Button opdUp = new POVButton(operator, 0);
 	Button opdUpRight = new POVButton(operator, 45);
 	Button opdRight = new POVButton(operator, 90);
@@ -64,7 +64,6 @@ public class OI {
 	Button opdDownLeft = new POVButton(operator, 225);
 	Button opdLeft = new POVButton(operator, 270);
 	Button opdUpLeft = new POVButton(operator, 325);
-	*/
 
 	public static int leftX = 0;
 	public static int leftY = 1;
@@ -75,19 +74,20 @@ public class OI {
 	  
   public OI(){
 	//Bind commands to buttons here
+	//Driver/cargo controls
 	A.whileHeld(new CV_Belt(RobotMap.beltPower));
 	B.whileHeld(new CV_Belt(-RobotMap.beltPower));
 	X.whileHeld(new FD_Roller(-RobotMap.feederPower));
 	Y.whileHeld(new FD_Roller(RobotMap.feederPower));
-
-
-	dUp.toggleWhenPressed(new CV_Pivot());
-	dDown.toggleWhenPressed(new FD_Pivot());
-	dLeft.toggleWhenPressed(new HG_InitExtend());
-	dRight.toggleWhenPressed(new HG_FullExtend());
-	
-	RB.toggleWhenPressed(new HG_Claw());
-
-	//Start.whenPressed(new AutoDrive());
+	dUp.whenPressed(new CV_Pivot());
+	dDown.whenPressed(new FD_Pivot());
+	LB.whenPressed(new LimeDrive());
+	//Hatch grabber controls
+	opX.whenPressed(new HG_InitExtend());
+	opY.whenPressed(new HG_FullExtend());
+	opA.whenPressed(new HG_Claw());
+	opLB.whenPressed(new CargoHatch());
+	opRB.whenPressed(new RocketHatch());
+	opdLeft.whenPressed(new HG_Reset());
   }	
 }

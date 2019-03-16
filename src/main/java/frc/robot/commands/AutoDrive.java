@@ -11,16 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 import jaci.pathfinder.modifiers.TankModifier;
+import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.followers.EncoderFollower;
 
 
 public class AutoDrive extends Command {
 
   EncoderFollower left, right;
+  TankModifier modifier = Robot.dt.createTrajectory();
+  
+  double gyro_heading, desired_heading, angleDiff, turn;
 
   public AutoDrive(){
     requires(Robot.dt);
-    TankModifier modifier = Robot.dt.createTrajectory();
 
     left = new EncoderFollower(modifier.getLeftTrajectory());
     right = new EncoderFollower(modifier.getRightTrajectory());
@@ -46,8 +49,18 @@ public class AutoDrive extends Command {
     double r = right.calculate(
       Robot.dt.frontLeft.getSelectedSensorPosition());
 
-    Robot.dt.frontLeft.set(l);
-    Robot.dt.frontRight.set(r);
+    gyro_heading = Robot.nx.getAngle();
+    desired_heading = Pathfinder.r2d(left.getHeading());
+
+    angleDiff = Pathfinder.boundHalfDegrees(
+      desired_heading - gyro_heading) % 360.0;
+    if (Math.abs(angleDiff) > 180.0){
+      angleDiff = (angleDiff > 0) ? angleDiff - 360 : angleDiff + 360;
+    }
+    turn = 0.8 * (-1.0/80.0) * angleDiff;
+
+    Robot.dt.frontLeft.set(l+turn);
+    Robot.dt.frontRight.set(r-turn);
   }
 
   @Override
@@ -59,9 +72,7 @@ public class AutoDrive extends Command {
   @Override
   protected void end() {
   }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
+  
   @Override
   protected void interrupted() {
   }

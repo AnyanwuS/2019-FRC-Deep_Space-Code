@@ -7,12 +7,14 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;
 
-public class HG_InitExtend extends Command {
+public class HG_Reset extends Command {
 
-  public HG_InitExtend(){
+  public HG_Reset(){
       requires(Robot.hg);
   }
 
@@ -22,7 +24,15 @@ public class HG_InitExtend extends Command {
 
   @Override 
   public void execute(){
-    Robot.hg.shiftPiston(Robot.hg.initExtend);
+    Robot.hg.claw.set(DoubleSolenoid.Value.kReverse);
+    Timer.delay(0.1);
+    Robot.hg.initExtend.set(DoubleSolenoid.Value.kReverse);
+    Timer.delay(0.1);
+    Robot.hg.fullExtend.set(DoubleSolenoid.Value.kReverse);
+    Timer.delay(0.1);
+    Robot.hg.initExtend.set(DoubleSolenoid.Value.kOff);
+    Robot.hg.fullExtend.set(DoubleSolenoid.Value.kOff);
+    Robot.hg.claw.set(DoubleSolenoid.Value.kOff);
   }
 
   @Override

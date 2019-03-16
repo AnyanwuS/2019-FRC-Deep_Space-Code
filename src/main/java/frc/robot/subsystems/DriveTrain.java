@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 import frc.robot.commands.Drive;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -20,13 +22,14 @@ import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.modifiers.TankModifier;
 
 public class Drivetrain extends Subsystem {
+  public double[] velocity = new double[2];
   //Motor controllers for drivetrain
   public WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.leftMaster);
   public WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.rightMaster);
-  public WPI_VictorSPX rearLeft = new WPI_VictorSPX(RobotMap.leftSlave);
-  public WPI_VictorSPX rearRight = new WPI_VictorSPX(RobotMap.rightSlave);
-  public WPI_VictorSPX middleLeft = new WPI_VictorSPX(RobotMap.leftDonkey);
-  public WPI_VictorSPX middleRight = new WPI_VictorSPX(RobotMap.rightDonkey);
+  public WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.leftSlave);
+  public WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.rightSlave);
+  public WPI_TalonSRX middleLeft = new WPI_TalonSRX(RobotMap.leftDonkey);
+  public WPI_TalonSRX middleRight = new WPI_TalonSRX(RobotMap.rightDonkey);
 
   public DifferentialDrive dd = new DifferentialDrive(frontLeft, frontRight);
   //Fit, samples, dt, maxV, maxA, maxJ 
@@ -48,13 +51,13 @@ public class Drivetrain extends Subsystem {
   }
 
   public Drivetrain(){
-    //Sets rear motors to follow rotation of the primary motors
     dd.setSafetyEnabled(false);
+    //Create followers for the master controllers
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
     middleLeft.follow(frontLeft);
     middleRight.follow(frontRight);
-  
+    //Initialize and bind coders to master talon controllers
     frontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     frontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
@@ -65,13 +68,14 @@ public class Drivetrain extends Subsystem {
   }
   
   public double[] encoderVelocity(){
-    //Returns velocity 
-    double[] velocity = new double[2];
-    double wheelCircumference = 0.216*Math.PI;
-    velocity[0] = ((frontLeft.getSelectedSensorVelocity()
-    /4096)*wheelCircumference)/10;
+    //Returns velocity of both sides of the drivetrain
+    double wheelCircumference = 0.1524*Math.PI;
+    
+    velocity[0] = -((frontLeft.getSelectedSensorVelocity()
+    /4096.0)*wheelCircumference)*10.0;
     velocity[1] = ((frontRight.getSelectedSensorVelocity()
-    /4096)*wheelCircumference)/10;
+    /4096.0)*wheelCircumference)*10.0;
+
     return velocity;
   }
 

@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.Robot;
 
-//import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,7 +12,7 @@ public class TimedDrive extends Command {
 
     private double x, y;
 
-    public TimedDrive(double x, double y, double duration) {
+    public TimedDrive(double y, double x, double duration) {
         requires(Robot.dt);
         this.x = x;
         this.y = y;
@@ -24,7 +23,7 @@ public class TimedDrive extends Command {
     }
 
     protected void execute(){
-        Robot.dt.ArcadeDrive(-x, y);
+        Robot.dt.ArcadeDrive(-y, x);
         Timer.delay(0.005);
     }
 

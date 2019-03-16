@@ -8,12 +8,13 @@
 package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.OI;
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Drive extends Command {
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+public class Drive extends Command {
+  
   public Drive(){
     requires(Robot.dt);
   }
@@ -26,6 +27,10 @@ public class Drive extends Command {
   @Override
   protected void execute(){
     Robot.dt.ArcadeDrive(OI.driver.getRawAxis(OI.leftY), OI.driver.getRawAxis(OI.rightX));
+    double[] currentVelocity = Robot.dt.encoderVelocity();
+    //Put data into Smartdashboard
+    SmartDashboard.putNumber("Left Encoder Velocity: ", currentVelocity[0]);
+    SmartDashboard.putNumber("Right Encoder Velocity: ", currentVelocity[1]);
     Timer.delay(0.005);
   }
 

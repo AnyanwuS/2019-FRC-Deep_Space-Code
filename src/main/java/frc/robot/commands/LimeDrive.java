@@ -38,12 +38,10 @@ public class LimeDrive extends Command{
     double Kp = 0.07;
     double minPower = 0.0;
 
-    if (Robot.lm.validTarget()){
-      if (Robot.lm.getHorizontalOffset() > 1){
-        steeringAdjust = Kp * headingError - minPower;
-      }else if (headingError < 1){
-        steeringAdjust = Kp * headingError + minPower;
-      }
+    if (Robot.lm.getHorizontalOffset() > 1){
+      steeringAdjust = Kp * headingError - minPower;
+    }else if (headingError < 1){
+      steeringAdjust = Kp * headingError + minPower;
     }
 
     Robot.dt.ArcadeDrive(OI.driver.getRawAxis(1), steeringAdjust);
@@ -51,8 +49,7 @@ public class LimeDrive extends Command{
   }
 
   @Override
-  protected boolean isFinished(){
-    //Originally returned false; Make sure this does not mess limedrive execution up
+  protected boolean isFinished(){ 
     return true;
   }
 

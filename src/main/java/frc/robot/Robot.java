@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
   public static HatchGrabber hg = new HatchGrabber();
   public static Feeder fd = new Feeder();
   public static Conveyor cv = new Conveyor();
-
+  public static NavX nx = new NavX();
   public static RobotMap rm = new RobotMap();
   public static OI oi;
 
@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Teleop Drive", new Drive());
     m_chooser.addOption("Auto Drive", new AutoLimeDrive());
     SmartDashboard.putData("Teleop", m_chooser);
+    nx.resetGyro();
   }
 
   @Override
@@ -67,28 +68,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit(){
-    m_autonomousCommand = m_chooser.getSelected();
-    /* Initialize autonomous drive code here and add it to Java SmartDashboard
-    in robotInit() above. If you prefer the LabVIEW Dashboard, remove all
-    of the chooser code and uncomment the getString code to get the auto name
-    from the text box below the Gyro */
-
-    /* Template for initializing auto drive command
-    String autoSelected = SmartDashboard.getString("Auto Selector","Default");
-    switch(autoSelected){
-      case "My Auto":
-        autonomousCommand = new MyAutoCommand();
-        break;
-      case "Default Auto":
-        autonomousCommand = new ExampleCommand();
-        break;
-      }
-    */
-
-    //Add auto cmd to scheduler
-    if (m_autonomousCommand != null){
-      m_autonomousCommand.start();
-    }
+    nx.resetGyro();
+    //Scheduler.getInstance().run();
   }
 
   //PERIODIC FUNCTIONS
@@ -108,6 +89,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic(){
+    Scheduler.getInstance().run();
+  }
+
+  @Override
+  public void autonomousPeriodic() {
     Scheduler.getInstance().run();
   }
 

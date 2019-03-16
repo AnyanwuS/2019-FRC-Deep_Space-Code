@@ -10,7 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-//TODO: Make this work with multi-stage extension
 public class HG_FullExtend extends Command {
 
   public HG_FullExtend(){
