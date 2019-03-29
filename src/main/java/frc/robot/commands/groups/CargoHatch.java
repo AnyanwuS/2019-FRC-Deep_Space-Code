@@ -19,10 +19,10 @@ public class CargoHatch extends CommandGroup {
   addParallel(new Command()) statements will run commands at the same time as other commands called with addParallel()
   */
   public CargoHatch(){
-    addSequential(new HG_InitExtend(), 0.1);
+    addSequential(new HG_Extend(), 0.1);
     addSequential(new WaitCommand(0.6));
     addSequential(new HG_Claw(), 0.1);
     addSequential(new WaitCommand(0.25));
-    addSequential(new HG_InitExtend(), 0.1);
+    addSequential(new HG_Extend(), 0.1);
   }
 }

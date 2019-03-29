@@ -26,12 +26,9 @@ public class HG_Reset extends Command {
   public void execute(){
     Robot.hg.claw.set(DoubleSolenoid.Value.kReverse);
     Timer.delay(0.1);
-    Robot.hg.initExtend.set(DoubleSolenoid.Value.kReverse);
+    Robot.hg.extend.set(DoubleSolenoid.Value.kReverse);
     Timer.delay(0.1);
-    Robot.hg.fullExtend.set(DoubleSolenoid.Value.kReverse);
-    Timer.delay(0.1);
-    Robot.hg.initExtend.set(DoubleSolenoid.Value.kOff);
-    Robot.hg.fullExtend.set(DoubleSolenoid.Value.kOff);
+    Robot.hg.extend.set(DoubleSolenoid.Value.kOff);
     Robot.hg.claw.set(DoubleSolenoid.Value.kOff);
   }
 

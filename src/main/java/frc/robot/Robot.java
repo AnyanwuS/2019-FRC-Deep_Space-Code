@@ -6,12 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import edu.wpi.first.wpilibj.TimedRobot;
 
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.cscore.UsbCamera;
 
 import frc.robot.commands.*;
 import frc.robot.commands.groups.*;
@@ -34,6 +37,7 @@ public class Robot extends TimedRobot {
   public static NavX nx = new NavX();
   public static RobotMap rm = new RobotMap();
   public static OI oi;
+  public static UsbCamera hgCamera = new UsbCamera("cam0", 0);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -46,7 +50,11 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Teleop Drive", new Drive());
     m_chooser.addOption("Auto Drive", new AutoLimeDrive());
     SmartDashboard.putData("Teleop", m_chooser);
+
     nx.resetGyro();
+    hgCamera.setFPS(30);
+    hgCamera.setResolution(160,120);
+    CameraServer.getInstance().startAutomaticCapture(hgCamera);
   }
 
   @Override

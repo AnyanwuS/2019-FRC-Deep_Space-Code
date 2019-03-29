@@ -74,7 +74,7 @@ public class OI {
 	  
   public OI(){
 	//Bind commands to buttons here
-	//Driver/cargo controls
+	/*Driver/cargo controls
 	A.whileHeld(new CV_Belt(RobotMap.beltPower));
 	B.whileHeld(new CV_Belt(-RobotMap.beltPower));
 	X.whileHeld(new FD_Roller(-RobotMap.feederPower));
@@ -83,11 +83,20 @@ public class OI {
 	dDown.whenPressed(new FD_Pivot());
 	LB.whenPressed(new LimeDrive());
 	//Hatch grabber controls
-	opX.whenPressed(new HG_InitExtend());
-	opY.whenPressed(new HG_FullExtend());
+	opX.whenPressed(new HG_Extend());
 	opA.whenPressed(new HG_Claw());
 	opLB.whenPressed(new CargoHatch());
 	opRB.whenPressed(new RocketHatch());
-	opdLeft.whenPressed(new HG_Reset());
+	opdLeft.whenPressed(new HG_Reset());*/
+
+	A.whileHeld(new CV_Belt(RobotMap.beltPower));
+	B.whileHeld(new CV_Belt(-RobotMap.beltPower));
+	X.whileHeld(new FD_Roller(RobotMap.feederPower));
+	Y.whileHeld(new FD_Roller(-RobotMap.feederPower));
+	dUp.whenPressed(new CV_Pivot());
+	dDown.whenPressed(new FD_Pivot());
+	dLeft.whenPressed(new HG_Extend());
+	RB.whenPressed(new HG_Claw());
+	LB.whenPressed(new CargoHatch());
   }	
 }

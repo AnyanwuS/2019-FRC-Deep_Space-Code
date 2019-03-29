@@ -26,10 +26,10 @@ public class Drivetrain extends Subsystem {
   //Motor controllers for drivetrain
   public WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.leftMaster);
   public WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.rightMaster);
-  public WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.leftSlave);
-  public WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.rightSlave);
-  public WPI_TalonSRX middleLeft = new WPI_TalonSRX(RobotMap.leftDonkey);
-  public WPI_TalonSRX middleRight = new WPI_TalonSRX(RobotMap.rightDonkey);
+  public WPI_VictorSPX rearLeft = new WPI_VictorSPX(RobotMap.leftSlave);
+  public WPI_VictorSPX rearRight = new WPI_VictorSPX(RobotMap.rightSlave);
+  public WPI_VictorSPX middleLeft = new WPI_VictorSPX(RobotMap.leftDonkey);
+  public WPI_VictorSPX middleRight = new WPI_VictorSPX(RobotMap.rightDonkey);
 
   public DifferentialDrive dd = new DifferentialDrive(frontLeft, frontRight);
   //Fit, samples, dt, maxV, maxA, maxJ 

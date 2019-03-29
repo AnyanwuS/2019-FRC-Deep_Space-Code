@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HG_InitExtend extends Command {
+public class HG_Extend extends Command {
 
-  public HG_InitExtend(){
+  public HG_Extend(){
       requires(Robot.hg);
   }
 
@@ -22,7 +22,7 @@ public class HG_InitExtend extends Command {
 
   @Override 
   public void execute(){
-    Robot.hg.shiftPiston(Robot.hg.initExtend);
+    Robot.hg.shiftPiston(Robot.hg.extend);
   }
 
   @Override
